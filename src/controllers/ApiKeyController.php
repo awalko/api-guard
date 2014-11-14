@@ -1,14 +1,14 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: chrisbjr
+ * User: awalko
  * Date: 6/26/14
  * Time: 7:52 PM
  */
 
-namespace Chrisbjr\ApiGuard;
+namespace Awalko\ApiGuard;
 
-use Chrisbjr\ApiGuard\Transformers\ApiKeyTransformer;
+use Awalko\ApiGuard\Transformers\ApiKeyTransformer;
 
 class ApiKeyController extends ApiGuardController
 {
@@ -36,4 +36,4 @@ class ApiKeyController extends ApiGuardController
         return $this->response->withItem($apiKey, new ApiKeyTransformer);
     }
 
-} 
+}

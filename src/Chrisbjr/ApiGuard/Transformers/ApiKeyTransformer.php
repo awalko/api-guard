@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrisbjr\ApiGuard\Transformers;
+namespace Awalko\ApiGuard\Transformers;
 
-use Chrisbjr\ApiGuard\ApiKey;
+use Awalko\ApiGuard\ApiKey;
 use League\Fractal\TransformerAbstract;
 
 class ApiKeyTransformer extends TransformerAbstract

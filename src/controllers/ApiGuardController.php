@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrisbjr\ApiGuard;
+namespace Awalko\ApiGuard;
 
 use Controller;
 use Route;
@@ -109,7 +109,7 @@ class ApiGuardController extends Controller
             if (!empty($apiMethods[$method]['limits'])) {
 
                 if (Config::get('api-guard::logging') === false) {
-                    Log::warning("[Chrisbjr/ApiGuard] You specified a limit in the $method method but API logging needs to be enabled in the configuration for this to work.");
+                    Log::warning("[Awalko/ApiGuard] You specified a limit in the $method method but API logging needs to be enabled in the configuration for this to work.");
                 }
 
                 $limits = $apiMethods[$method]['limits'];
@@ -121,7 +121,7 @@ class ApiGuardController extends Controller
 
                     $keyLimit = (!empty($limits['key']['limit'])) ? $limits['key']['limit'] : 0;
                     if ($keyLimit == 0 || is_integer($keyLimit) == false) {
-                        Log::warning("[Chrisbjr/ApiGuard] You defined a key limit to the " . Route::currentRouteAction() . " route but you did not set a valid number for the limit variable.");
+                        Log::warning("[Awalko/ApiGuard] You defined a key limit to the " . Route::currentRouteAction() . " route but you did not set a valid number for the limit variable.");
                     } else {
                         if (!$this->apiKey->ignore_limits) {
                             // This means the apikey is not ignoring the limits
@@ -131,7 +131,7 @@ class ApiGuardController extends Controller
                             $keyIncrementTime = strtotime('-' . $keyIncrement);
 
                             if ($keyIncrementTime == false) {
-                                Log::warning("[Chrisbjr/ApiGuard] You have specified an invalid key increment time. This value can be any value accepted by PHP's strtotime() method");
+                                Log::warning("[Awalko/ApiGuard] You have specified an invalid key increment time. This value can be any value accepted by PHP's strtotime() method");
                             } else {
                                 // Count the number of requests for this method using this api key
                                 $apiLogCount = ApiLog::where('api_key_id', '=', $this->apiKey->id)
@@ -142,7 +142,7 @@ class ApiGuardController extends Controller
                                     ->count();
 
                                 if ($apiLogCount >= $keyLimit) {
-                                    Log::warning("[Chrisbjr/ApiGuard] The API key ID#{$this->apiKey->id} has reached the limit of {$keyLimit} in the following route: " . Route::currentRouteAction());
+                                    Log::warning("[Awalko/ApiGuard] The API key ID#{$this->apiKey->id} has reached the limit of {$keyLimit} in the following route: " . Route::currentRouteAction());
                                     return $this->response->errorUnwillingToProcess('You have reached the limit for using this API.');
                                 }
                             }
@@ -154,7 +154,7 @@ class ApiGuardController extends Controller
                 if (!empty($limits['method'])) {
                     $methodLimit = (!empty($limits['method']['limit'])) ? $limits['method']['limit'] : 0;
                     if ($methodLimit == 0 || is_integer($methodLimit) == false) {
-                        Log::warning("[Chrisbjr/ApiGuard] You defined a method limit to the " . Route::currentRouteAction() . " route but you did not set a valid number for the limit variable.");
+                        Log::warning("[Awalko/ApiGuard] You defined a method limit to the " . Route::currentRouteAction() . " route but you did not set a valid number for the limit variable.");
                     } else {
                         if ($this->apiKey != null && $this->apiKey->ignore_limits == true) {
                             // then we skip this
@@ -165,7 +165,7 @@ class ApiGuardController extends Controller
                             $methodIncrementTime = strtotime('-' . $methodIncrement);
 
                             if ($methodIncrementTime == false) {
-                                Log::warning("[Chrisbjr/ApiGuard] You have specified an invalid method increment time. This value can be any value accepted by PHP's strtotime() method");
+                                Log::warning("[Awalko/ApiGuard] You have specified an invalid method increment time. This value can be any value accepted by PHP's strtotime() method");
                             } else {
                                 // Count the number of requests for this method
                                 $apiLogCount = ApiLog::where('route', '=', Route::currentRouteAction())
@@ -175,7 +175,7 @@ class ApiGuardController extends Controller
                                     ->count();
 
                                 if ($apiLogCount >= $methodLimit) {
-                                    Log::warning("[Chrisbjr/ApiGuard] The API has reached the method limit of {$methodLimit} in the following route: " . Route::currentRouteAction());
+                                    Log::warning("[Awalko/ApiGuard] The API has reached the method limit of {$methodLimit} in the following route: " . Route::currentRouteAction());
                                     return $this->response->errorUnwillingToProcess('The limit for using this API method has been reached');
                                 }
                             }

@@ -15,13 +15,13 @@ I've been looking for an equivalent for Laravel but did not find any so this is 
 
 In the `require` key of `composer.json` file add the following
 
-    "chrisbjr/api-guard": "dev-master"
+    "awalko/api-guard": "dev-master"
 
 Run the Composer update comand
 
     $ composer update
 
-In your `config/app.php` add `'Chrisbjr\ApiGuard\ApiGuardServiceProvider'` to the end of the `$providers` array
+In your `config/app.php` add `'Awalko\ApiGuard\ApiGuardServiceProvider'` to the end of the `$providers` array
 
     'providers' => array(
 
@@ -29,13 +29,13 @@ In your `config/app.php` add `'Chrisbjr\ApiGuard\ApiGuardServiceProvider'` to th
         'Illuminate\Auth\AuthServiceProvider',
         ...
         'EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider',
-        'Chrisbjr\ApiGuard\ApiGuardServiceProvider',
+        'Awalko\ApiGuard\ApiGuardServiceProvider',
 
     ),
 
 Now generate the api-guard migration (make sure you have your database configuration set up correctly):
 
-    $ php artisan migrate --package="chrisbjr/api-guard"
+    $ php artisan migrate --package="awalko/api-guard"
 
 It will setup two tables - api_keys and api_logs.
 
@@ -79,9 +79,9 @@ Now, to prevent others from generating API keys through the route above, you can
 
 To create your own configuration file for ApiGuard, run the following command:
 
-    $ php artisan config:publish chrisbjr/api-guard
+    $ php artisan config:publish awalko/api-guard
 
-The configuration file will be found in `app/config/packages/chrisbjr/api-guard/config.php`. Open this file and change the `generateApiKeyRoute` variable to `false`
+The configuration file will be found in `app/config/packages/awalko/api-guard/config.php`. Open this file and change the `generateApiKeyRoute` variable to `false`
 
     'generateApiKeyRoute' => false
 
@@ -92,7 +92,7 @@ Generally, you will want to generate API keys for each user in your application.
 Basic usage of ApiGuard is to create a controller and extend that class to use the `ApiGuardController`.
 
     <?php
-    use Chrisbjr\ApiGuard\ApiGuardController;
+    use Awalko\ApiGuard\ApiGuardController;
 
     class BooksController extends ApiGuardController
     {
@@ -113,7 +113,7 @@ Basic usage of ApiGuard is to create a controller and extend that class to use t
                     ]
                 ]
             ],
-            
+
             'show' => [
                 'keyAuthentication' => false
             ]
@@ -125,12 +125,12 @@ Basic usage of ApiGuard is to create a controller and extend that class to use t
 
             return $this->response->withCollection($books, new BookTransformer);
         }
-        
+
         public function show($id)
         {
             try {
                 $book = Book::findOrFail($id);
-                
+
                 return $this->response->withItem($book, new BookTransformer);
             } catch (ModelNotFoundException $e) {
                 return $this->response->errorNotFound();
@@ -176,7 +176,7 @@ You should get the following response:
 
 ### Accessing the User instance and Stateless authentication
 
-You can easily access the User instance from the belongsTo() relationship of the ApiKey model to the User class. With this, we can implement API based authentication with the following as an example. 
+You can easily access the User instance from the belongsTo() relationship of the ApiKey model to the User class. With this, we can implement API based authentication with the following as an example.
 
 Note that while we have utilized [Confide](https://github.com/zizaco/confide) for handling the credential checking, you can have your own way of having this done (like using the native Laravel Auth class, or [Sentry](https://github.com/cartalyst/sentry) for that matter).
 
@@ -186,9 +186,9 @@ Note that while we have utilized [Confide](https://github.com/zizaco/confide) fo
 
 namespace api\v1;
 
-use Chrisbjr\ApiGuard\ApiGuardController;
-use Chrisbjr\ApiGuard\ApiKey;
-use Chrisbjr\ApiGuard\Transformers\ApiKeyTransformer;
+use Awalko\ApiGuard\ApiGuardController;
+use Awalko\ApiGuard\ApiKey;
+use Awalko\ApiGuard\Transformers\ApiKeyTransformer;
 use Confide;
 use Input;
 use User;

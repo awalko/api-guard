@@ -1,5 +1,5 @@
 <?php
-namespace Chrisbjr\ApiGuard;
+namespace Awalko\ApiGuard;
 
 /**
  * Class ApiKey

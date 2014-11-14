@@ -1,5 +1,5 @@
 {
-    "name": "chrisbjr/api-guard",
+    "name": "awalko/api-guard",
     "description": "A simple way of authenticating your APIs with API keys using Laravel",
     "keywords": [
         "api",
@@ -9,11 +9,11 @@
         "api authentication",
         "laravel"
     ],
-    "homepage": "https://github.com/chrisbjr/ApiGuard",
+    "homepage": "https://github.com/awalko/ApiGuard",
     "authors": [
         {
             "name": "Chris Bautista",
-            "email": "chrisbjr@gmail.com"
+            "email": "awalko@gmail.com"
         }
     ],
     "require": {
@@ -30,7 +30,7 @@
             "src/models"
         ],
         "psr-0": {
-            "Chrisbjr\\ApiGuard\\": "src/"
+            "Awalko\\ApiGuard\\": "src/"
         }
     },
     "minimum-stability": "stable"

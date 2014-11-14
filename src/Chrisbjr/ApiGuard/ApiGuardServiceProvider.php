@@ -1,4 +1,4 @@
-<?php namespace Chrisbjr\ApiGuard;
+<?php namespace Awalko\ApiGuard;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +18,7 @@ class ApiGuardServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('chrisbjr/api-guard');
+		$this->package('awalko/api-guard');
 
         $this->app->register('EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
 
