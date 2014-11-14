@@ -1,7 +1,10 @@
 <?php
 
+namespace App\Database\Migration;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateApiKeysTable extends Migration
 {
@@ -48,5 +51,4 @@ class CreateApiKeysTable extends Migration
         Schema::drop('api_keys');
         Schema::drop('api_logs');
     }
-
 }
