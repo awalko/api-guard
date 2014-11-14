@@ -21,7 +21,7 @@ class ApiKey extends \Eloquent
         } // Already in the DB? Fail. Try again
         while ($this->keyExists($newKey));
 
-        return $newKey;
+        return $this->key = $newKey;
     }
 
     private function keyExists($key)
