@@ -9,11 +9,11 @@
         "api authentication",
         "laravel"
     ],
-    "homepage": "https://github.com/awalko/ApiGuard",
+    "homepage": "https://github.com/awalko/api-guard",
     "authors": [
         {
             "name": "Chris Bautista",
-            "email": "awalko@gmail.com"
+            "email": "chrisbjr@gmail.com"
         }
     ],
     "require": {
